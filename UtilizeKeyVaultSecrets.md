@@ -162,7 +162,13 @@ To get the solution deployed into Azure, consider using the included YAML file t
 
     In the deployment center, select your GitHub repository and allow Azure to connect and deploy with the default CI/CD action for the project.
 
-    
+    !["Using the deployment center to set up CI/CD"](/images/image0008-usingthedeploymentcenter.png)  
+
+1. Update CI/CD for Ubuntu
+
+    Ubuntu builds at GitHub will run much more quickly than a windows build agent.  Update the GitHub action YAML to use the ubuntu-agent:
+
+    !["Changing to the ubuntu agent"](/images/image0009-switch-to-ubuntu.png)  
 
 
 
