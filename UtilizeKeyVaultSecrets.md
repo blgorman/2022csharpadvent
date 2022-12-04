@@ -16,8 +16,18 @@ To get started, let's first just build a simple project that will be able to lev
 
 For this demonstration, I'm using a default MVC application.  Code in other projects would be similar other than establishing injection and other trivial changes that happen in non-MVC projects.
 
-Run the following command:
+1. Create the project.
 
-```c#
-dotnet new mvc
-```  
+    To create the project, run the following command:
+
+    ```c#
+    dotnet new mvc
+    ```  
+
+    !["running dotnet new mvc"](/images/image0001-dotnet-new-mvc.png)  
+
+1. Add a secret value to the appsettings.json file.
+
+    Add the secret to the appsettings.json file
+
+    
