@@ -131,6 +131,8 @@ To get the solution deployed into Azure, consider using the included YAML file t
     az group create -n $rgName -l $loc
     ```   
 
+    !["Creating the resource group"](/images/image0005-creatingrg.png)  
+
     Create the app service plan:
 
     ```bash
@@ -139,6 +141,8 @@ To get the solution deployed into Azure, consider using the included YAML file t
     az appservice plan create -n $planName -g $rgName --sku $sku
     ```  
 
+    !["Creating the app service plan"](/images/image0006-create-app-service-plan.png)
+
     After the plan is created, create the app service
 
     ```bash
@@ -146,13 +150,19 @@ To get the solution deployed into Azure, consider using the included YAML file t
     az webapp create -n $appServiceName -g $rgName --plan $planName
     ```  
 
+    !["Creating the app service"](/images/image0007-creatingtheappservice.png)  
+
 1. Set up CI/CD on the app 
 
-    Once the plan is created, browse to it in your portal.  
+    If you are just using code from your machine, you could right-click and publish.
 
-    On the App Service blade, get the publish profile:
+    If you want to deploy from a public GIT repo, just use the deployment center and point to the public GitHub URL.
 
-    ![]()
+    If you use the deployment center, you can also just connect to your own GitHub account and let Azure build the CI/CD.
+
+    In the deployment center, select your GitHub repository and allow Azure to connect and deploy with the default CI/CD action for the project.
+
+    
 
 
 
