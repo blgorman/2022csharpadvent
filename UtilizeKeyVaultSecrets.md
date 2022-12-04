@@ -194,17 +194,118 @@ To keep the secret safe, the secret should be placed into an Azure Key Vault.  O
 
     To store the secrets at Azure Key Vault, you'll need to create a vault.  To create the vault, run the following commands:
 
-    ```cs
+    ```bash
     kvName=csadvent2022vault
     az keyvault create --location $loc --name MyKeyVault --resource-group $rgName 
     ```  
 
     !["creating a keyvault"](/images/image0013-creating-a-keyvault.png)  
 
+1. Create the Key Vault Secret
+
+    You can create the KeyVault secret via the portal or via the CLI.  For this demonstration, we're already in the CLI so let's add it that way then just review it in the portal.
+
+    ```bash  
+    az keyvault secret set --vault-name $kvName --name "API-KEY" --value "vault-secret-59adf879-2722-410a-b8f9-97c42e03fc73"
+    ```  
+
+    Then view the secret
+
+    ```bash
+    az keyvault secret show --name "API-key" --vault-name $kvName --query "value"
+    ```  
+
+    !["Set and Get a vault secret with the az cli commands"](/images/image0014-setandgetvaultsecret.png)
+
+    >**Note:** The Secret URI is shown as the ID in the image/output.  This URI also includes the secret version as part of the URI.
+
+    You can see secrets and values in the Azure portal:
+
+    !["Reviewing the secret in the vault"](/images/image0015-reviewsecretinthevault1.png)  
+
+    Drill in to see more info:
+
+    !["Drill in to get the secret URI and see more information"](/images/image0016-reviewsecretsinvault2.png)  
+
+    Get the Secret URI For use from the App Service.
+
+1. Use the secret from the App Service
+
+    In order to use the secret from the App Service, you need to wrap the value with:
+
+    ```text
+    @Microsoft.KeyVault(SecretUri=.....)
+    ```  
+
+    Replace the `.....` with the URI copied above, such as:
+
+    ```text
+    @Microsoft.KeyVault(SecretUri=https://csadvent2022vault.vault.azure.net/secrets/API-KEY/1e3698837c4e460b8b6eab48ff2e834a)
+    ```  
+
+    Place the value in the Configuration value for the API key in the App Service.  Note that you didn't have to name the secret the same as the value for the key.
+
+    !["Setting the configuration to utilize the Key vault secret](/images/image0017-configurationtokeyvault.png)
+
+    >**Note:** The key vault reference currently will not work.  The reference has a red X and if you view it in the app you would see the text entry:
+
+    !["The key is currently not retrievable"](/images/image0018-theapikeysecretisntcurrentlyretrievable.png)  
+
 1. Set the identity for the App Service
+
+    For the app service to work, you'll need to give it a system-managed identity, and then you'll need to give it permission in the vault.
+
+    To enable the system-managed identity, on the App Service in the Portal, under the `Identity` left-navigation menu, select `On` and then hit `Yes` to save the identity.  
+
+    !["Giving the App service a system-managed identity"](/images/image0019-creatingsystemmangedidentity.png)  
+
+    The identity will allow the App Service to be used in RBAC on the KeyVault policies.
+
+    Once the identity is saved, copy the object id from the identity blade
+
+    !["Get the object id for use in RBAC"](/images/image0020-gettingtheobjectid.png)  
 
 1. Give the app service permission on the Key Vault
 
-1. Update the app service configuration to read from the Key Vault
+    Once the App Service has a system-managed identity, the identity can be used in RBAC to give `GET` permission on the secrets from the vault.
+
+    Navigate to the Key Vault and then choose the `Access Configuration` left-navigation menu.  On the menu, select `Go to Access Policies` to open the policies blade.
+
+    Select `+ Create` to begin creating a policy.
+
+    On the `Basics` tab select only the `Secrets -> Get` option.  Everything else should be unchecked.
+
+    !["Select only the GET permission"](/images/image0021-addthesecretgetpermissiononly.png)  
+
+    On the next blade, enter the object id retrieved above, and then select the identity.  
+
+    !["Select the principal by object ID"](/images/image0022-usetheobjectidforpermissions.png)  
+
+    Complete the assignment.  When done, it should be listed on the main policies blade.
+
+    !["Policies now show the get permission for the app service"](/images/image0023-getSecretPermissionAdded.png)  
+
+
+1. Review the application configuration
+
+    After setting the configuration above and also giving permissions with the ID as above, wait a couple of minutes for the permissions to propagate, and go back to the App Service. 
+
+    Review the configuration to see if a green checkmark has been added to the configuration setting.
+
+    !["Key Vault Secret is now showing with a green checkmark"](/images/image0024-KeyVaultIsAuthorizedAndSecretIsRetrieved.png)  
+
+1. Review the Application
+
+    Navigate to the application, and you will be able to see the Key Vault Secret displayed from the Web application.
+
+    !["Vault Secret Shown on Web App"](/images/image0025-vault-secret-shown-on-web-app.png)  
+
+## What about C#
+
+I know what you're thinking:  This is a C# event, not really an Azure event, and this post has shown very little C#.  For that reason, to finish this up, let's do a couple of quick C# commands against the vault.
+
+In order for this to work, your user account will need to have the appropriate permissions on the Key Vault.
+
+
 
 
