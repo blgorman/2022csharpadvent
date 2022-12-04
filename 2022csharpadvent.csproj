@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>_2022csharpadvent</RootNamespace>
+    <UserSecretsId>51a975d3-0256-49a4-9fec-4fa9b4670105</UserSecretsId>
   </PropertyGroup>
 
 </Project>
