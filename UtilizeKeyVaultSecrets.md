@@ -136,7 +136,7 @@ To get the solution deployed into Azure, consider using the included YAML file t
     Create the app service plan:
 
     ```bash
-    planName=csadvent2022web
+    planName=csadvent2022simpleweb
     sku=F1
     az appservice plan create -n $planName -g $rgName --sku $sku
     ```  
@@ -147,7 +147,7 @@ To get the solution deployed into Azure, consider using the included YAML file t
 
     ```bash
     appServiceName=csadvent2022secrets-web
-    az webapp create -n $appServiceName -g $rgName --plan $planName
+    az webapp create -n $appServiceName -g $rgName --plan $planName --runtime "dotnet:7"
     ```  
 
     !["Creating the app service"](/images/image0007-creatingtheappservice.png)  
@@ -191,6 +191,15 @@ To get the solution deployed into Azure, consider using the included YAML file t
 To keep the secret safe, the secret should be placed into an Azure Key Vault.  Once the key is in the Vault, the application can read the value as expected.
 
 1. Create the key vault
+
+    To store the secrets at Azure Key Vault, you'll need to create a vault.  To create the vault, run the following commands:
+
+    ```cs
+    kvName=csadvent2022vault
+    az keyvault create --location $loc --name MyKeyVault --resource-group $rgName 
+    ```  
+
+    !["creating a keyvault"](/images/image0013-creating-a-keyvault.png)  
 
 1. Set the identity for the App Service
 
