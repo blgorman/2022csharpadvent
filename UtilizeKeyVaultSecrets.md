@@ -170,6 +170,32 @@ To get the solution deployed into Azure, consider using the included YAML file t
 
     !["Changing to the ubuntu agent"](/images/image0009-switch-to-ubuntu.png)  
 
+1. Review the deployment
 
+    Open the site after it deploys.  The original secret from the `appsettings.json` file is displayed.
+
+    !["The app is deployed but the original secret is displayed"](/images/image0010-the-deployed-app-shows-appsettings-secret.png)
+
+1. Update the configuration
+
+    Override the configuration on the deployed application to show the secret from the configuration for the app service:
+
+    !["Update App Service Configuration"](/images/image0011-appsettingsconfiguration-updated.png)  
+
+    With the configuration updated, the new value shows as expected:
+
+    !["The new value shows as expected"](/images/image0012-theupdatedsettingshows.png)  
+
+## Place the secret in an Azure Key Vault
+
+To keep the secret safe, the secret should be placed into an Azure Key Vault.  Once the key is in the Vault, the application can read the value as expected.
+
+1. Create the key vault
+
+1. Set the identity for the App Service
+
+1. Give the app service permission on the Key Vault
+
+1. Update the app service configuration to read from the Key Vault
 
 
