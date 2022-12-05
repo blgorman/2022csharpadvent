@@ -300,12 +300,6 @@ To keep the secret safe, the secret should be placed into an Azure Key Vault.  O
 
     !["Vault Secret Shown on Web App"](/images/image0025-vault-secret-shown-on-web-app.png)  
 
-## What about C#
+## Conclusion
 
-I know what you're thinking:  This is a C# event, not really an Azure event, and this post has shown very little C#.  For that reason, to finish this up, let's do a couple of quick C# commands against the vault.
-
-In order for this to work, your user account will need to have the appropriate permissions on the Key Vault.
-
-
-
-
+Now that the application is deployed and KeyVault is integrated, you can work with secrets from within your application as expected.  I hope that you found this information useful and have a great rest of the holiday season and an awesome 2023.
