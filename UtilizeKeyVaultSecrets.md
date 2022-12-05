@@ -1,10 +1,12 @@
-# Utilize Secrets in your C# projects
+# Utilize Secrets in your C# MVC projects
 
-This blog post is created for the 2022 [C# Advent Calendar Christmas 2022 event](https://csadvent.christmas/).  I'd like to thank []() for the opportunity to contribute.
+This blog post is created for the 2022 [C# Advent Calendar Christmas 2022 event](https://csadvent.christmas/).  I'd like to thank [Matthew Groves](https://twitter.com/mgroves) for the opportunity to contribute to this year's event.
 
-The focus of this post will be a demonstration on how to utilize C# as a developer to keep your secrets safe, whether it's locally on your machine or if you are reading the value from a secret store such as Azure Key Vault.
+The focus of this post will be a demonstration on how to keep your secrets safe, whether it's locally on your machine or if you are reading the value from a secret store such as Azure Key Vault.  The application is a simple .NET 7 MVC project.  The project starts with a simple value from `appsettings.json` and then quickly moves to the `usersecrets.json` file.  
 
-If you want to work along, you'll need an Azure subscription for deployment of the App Service and storing and retrieving the key at Azure Key Vault.  The code for the final solution will be included in this repository.  Alternatively, creation of the code should be pretty trivial and you would likely be able to just create this as you read along.
+The app is then deployed via CI/CD from GitHub into an Azure App service.  From there, the App Service configuration is leveraged.  Once everything is proven out, a vault is created and a secret is added.  The secret is then leveraged from the App Service.
+
+If you want to work along, you'll need an Azure subscription for deployment of the App Service and storing and retrieving the key at Azure Key Vault.  The code for the final solution will be included in this repository.  Alternatively, creation of the code is trivial and all instructions are given to create the code and services at Azure as you go.
 
 - [Getting a trial subscription at Azure](https://azure.microsoft.com/free/search/)
 
