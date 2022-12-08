@@ -305,3 +305,9 @@ To keep the secret safe, the secret should be placed into an Azure Key Vault.  O
 ## Conclusion
 
 Now that the application is deployed and KeyVault is integrated, you can work with secrets from within your application as expected.  I hope that you found this information useful and have a great rest of the holiday season and an awesome 2023.
+
+[Feel free to check out the blog post on my site](https://training.majorguidancesolutions.com/blog/c-advent-2022-utilize-secrets-in-your-c-mvc-projects)
+
+Drop me a tweet or a comment if you found this post helpful or if you have any questions or thoughts, would love to chat with you/meet you!  Also, look out for my upcoming AZ-204 Exam Reference book which is currently in the editing process with [APress](https://twitter.com/Apress)  
+
+All the best and be blessed!
